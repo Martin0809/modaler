@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { useModal } from './Modaler'
+import { useModal } from '../../src'
 
 function Container() {
   const modal: any = useModal()

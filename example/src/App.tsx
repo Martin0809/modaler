@@ -1,16 +1,14 @@
 import React from 'react'
-import Modal from './components'
+import ModalProvider from '../../src/'
+import modals from './components'
+import Container from './Container'
 
 function App() {
-  const handleClick = () => {
-    console.log('old')
-  }
-
   return (
-    <div onClick={handleClick}>
-      1221
-      <Modal></Modal>
-    </div>
+    <ModalProvider modals={modals}>
+      <div>1221</div>
+      <Container></Container>
+    </ModalProvider>
   )
 }
 

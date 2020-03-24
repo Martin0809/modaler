@@ -11,12 +11,12 @@ module.exports = {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js']
+  },
   devServer: {
     contentBase: './dist',
     hot: true
-  },
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
   module: {
     rules: [
@@ -31,7 +31,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Modaler Example',
-      template: './example/index.html'
+      template: './index.html'
     }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()

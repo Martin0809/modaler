@@ -1,7 +1,5 @@
-import React from 'react'
+import ConfirmModal from './ConfirmModal'
 
-function Modal() {
-  return <div>1234</div>
+export default {
+  CONFIRM_MODAL: ConfirmModal
 }
-
-export default Modal

@@ -1,15 +1,4 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
+import Provider from './Provider'
+export { default as useModal } from './hooks/useModal'
 
-function render(Component) {
-  ReactDOM.render(<Component />, document.getElementById('root'))
-}
-
-render(App)
-
-if ((module as any).hot) {
-  ;(module as any).hot.accept('./App', function() {
-    render(App)
-  })
-}
+export default Provider
