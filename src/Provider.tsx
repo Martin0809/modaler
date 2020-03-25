@@ -2,7 +2,7 @@ import React, { Suspense, createContext, useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 
 interface Props {
-  modals: {
+  modalMap: {
     [key: string]: any
   }
   children: any
@@ -10,11 +10,11 @@ interface Props {
 
 export const ModalContext: any = createContext(null)
 
-function Provider({ modals, children }: Props) {
+function Provider({ modalMap, children }: Props) {
   const [visible, setVisible] = useState(false)
   const [modalSymbol, setModalSymbol] = useState('')
   const [modalProps, setModalProps] = useState({})
-  const Modal = modals[modalSymbol]
+  const Modal = modalMap[modalSymbol]
 
   useEffect(() => {
     if (modalSymbol) {
@@ -22,12 +22,12 @@ function Provider({ modals, children }: Props) {
     }
   }, [modalSymbol])
 
-  const show = (modalSymbol: string, modalProps: any) => {
+  const show = (modalSymbol: string, modalProps: any = {}) => {
     setModalSymbol(modalSymbol)
     setModalProps(modalProps)
   }
 
-  const hide = (wait: number) => {
+  const hide = (wait: number = 0) => {
     setVisible(false)
     setTimeout(() => {
       setModalSymbol(undefined)

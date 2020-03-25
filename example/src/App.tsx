@@ -8,7 +8,7 @@ import './styles/index.less'
 
 function App() {
   return (
-    <ModalProvider modals={modals}>
+    <ModalProvider modalMap={modals}>
       <div className="wrapper">
         <h1>Modaler</h1>
         <small>一个简单可插拔的 Modal 容器</small>

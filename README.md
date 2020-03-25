@@ -12,9 +12,12 @@
 npm i modaler --save
 ```
 
+_注意：插件中用了 React Hooks, 请使用 React `v16.8.0` 或以上的版本_
+
 ### Usage
 
 Modaler 提供了一个 `Provider` 组件，包裹在你的程序外边，可以在用到第三方 Modal 组件事动态插入到 `document.body` 中。
+
 _注意：控制 Modal 显示隐藏的时，请使用 `props.visible`_
 
 ```jsx
@@ -25,7 +28,7 @@ import Container from './Container'
 import modals from './modals'
 
 const App = () => (
-  <ModalProvider modals={modals}>
+  <ModalProvider modalMap={modals}>
     <Container />
   </ModalProvider>
 )
@@ -43,6 +46,8 @@ export default {
   CONFIRM_MODAL: ConfirmModal
 }
 ```
+
+Modaler 同时提供了一个 `useModal` 的 Hook，返回一个对象，可以通过 `show` 和 `hide` 方法控制 Modal。
 
 ```jsx
 // Container.jsx
@@ -63,6 +68,21 @@ export default Container
 ```
 
 ## Api
+
+### ModalProviderProps
+
+- modalMap: Modal 组件以 key value 形式的映射
+
+### useModal(): object
+
+##### show(key: string, props: object)
+
+- key: 想要渲染的 Modal 组件的 key，必填
+- props: 传递给 Modal 组件的 props，默认带有 `visible` 属性，控制 Modal 组件显示隐藏时请使用该属性
+
+##### hide(wait: number)
+
+- wait: 毫秒数，一定时间后销毁 Modal 组件，一般用于有关闭动画的 Modal 组件，默认为 `0`
 
 ## Demo
 
