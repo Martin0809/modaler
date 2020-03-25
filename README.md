@@ -75,12 +75,12 @@ export default Container
 
 ### useModal(): object
 
-##### show(key: string, props: object)
+#### show(key: string, props: object)
 
 - key: 想要渲染的 Modal 组件的 key，必填
 - props: 传递给 Modal 组件的 props，默认带有 `visible` 属性，控制 Modal 组件显示隐藏时请使用该属性
 
-##### hide(wait: number)
+#### hide(wait: number)
 
 - wait: 毫秒数，一定时间后销毁 Modal 组件，一般用于有关闭动画的 Modal 组件，默认为 `0`
 
