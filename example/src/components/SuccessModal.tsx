@@ -2,7 +2,7 @@ import React from 'react'
 import { Modal } from 'antd'
 import { useModal } from '../../../src'
 
-function ConfirmModal({ visible, title }: any) {
+function SuccessModal({ visible, title }: any) {
   const modal: any = useModal()
 
   return (
@@ -12,4 +12,4 @@ function ConfirmModal({ visible, title }: any) {
   )
 }
 
-export default ConfirmModal
+export default SuccessModal

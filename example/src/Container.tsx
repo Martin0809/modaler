@@ -1,22 +1,21 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import { Button } from 'antd'
 import { useModal } from '../../src'
 
 function Container() {
   const modal: any = useModal()
 
-  const handleShow = () => {
-    modal.show('CONFIRM_MODAL')
-  }
-
-  const handleHide = () => {
-    modal.hide()
+  const handleShow = name => {
+    modal.show(name, {
+      title: name
+    })
   }
 
   return (
-    <Fragment>
-      <button onClick={handleShow}>show modal</button>
-      <button onClick={handleHide}>hide modal</button>
-    </Fragment>
+    <div className="container">
+      <Button onClick={() => handleShow('CONFIRM_MODAL')}>show confirm</Button>
+      <Button onClick={() => handleShow('SUCCESS_MODAL')}>show success</Button>
+    </div>
   )
 }
 
