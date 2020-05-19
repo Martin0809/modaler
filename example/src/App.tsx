@@ -1,5 +1,5 @@
 import React from 'react'
-import ModalProvider from '../../src/'
+import ModalProvider from '../../src'
 import modals from './components'
 import Container from './Container'
 
