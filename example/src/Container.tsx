@@ -1,13 +1,16 @@
 import React from 'react'
 import { Button } from 'antd'
-import { useModal } from '../../src'
+import { useModal, ModalInstance } from '../../src'
+import { SuccessModalProps } from './components/SuccessModal'
+import { ConfirmModalProps } from './components/ConfirmModal'
 
 function Container() {
-  const modal: any = useModal()
+  const modal: ModalInstance<SuccessModalProps | ConfirmModalProps> = useModal()
 
   const handleShow = (name) => {
     modal.show(name, {
       title: name,
+      content: '123123',
     })
   }
 
@@ -15,8 +18,6 @@ function Container() {
     <div className="container">
       <Button onClick={() => handleShow('CONFIRM_MODAL')}>show confirm</Button>
       <Button onClick={() => handleShow('SUCCESS_MODAL')}>show success</Button>
-      {}
-      <Button></Button>
     </div>
   )
 }

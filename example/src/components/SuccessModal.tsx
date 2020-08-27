@@ -1,9 +1,17 @@
 import React from 'react'
 import { Modal } from 'antd'
-import { useModal } from '../../../src'
+import { useModal, ModalInstance } from '../../../src'
 
-function SuccessModal({ visible, title }: any) {
-  const modal: any = useModal()
+export interface SuccessModalProps {
+  title: string
+}
+
+interface Props extends SuccessModalProps {
+  visible: boolean
+}
+
+function SuccessModal({ visible, title }: Props) {
+  const modal: ModalInstance<Props> = useModal()
 
   return (
     <Modal visible={visible} title={title} onCancel={() => modal.hide(300)}>

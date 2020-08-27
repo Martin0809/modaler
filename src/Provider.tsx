@@ -1,20 +1,35 @@
 import React, { Suspense, createContext, useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 
-interface Props {
-  modalMap: {
-    [key: string]: any
-  }
-  children: any
+type ShowFC<T> = (modalSymbol: string, modalProps?: T) => void
+type HideFC = (wait?: number) => void
+
+export interface ModalInstance<T = {}> {
+  show: ShowFC<T>
+  hide: (wait?: number) => void
 }
 
-export const ModalContext: any = createContext(null)
+export const ModalContext: React.Context<ModalInstance> = createContext(null)
 
-function Provider({ modalMap, children }: Props) {
+export interface ModalMap {
+  [key: string]:
+    | JSX.Element
+    | React.FunctionComponent<any>
+    | React.LazyExoticComponent<React.ComponentType<any>>
+}
+
+export default function Provider({
+  modalMap,
+  children,
+}: {
+  modalMap: ModalMap
+  children: React.ReactElement
+}): React.ReactElement {
   const [visible, setVisible] = useState(false)
   const [modalSymbol, setModalSymbol] = useState('')
   const [modalProps, setModalProps] = useState({})
-  const Modal = modalMap[modalSymbol]
+
+  const Modal = modalMap[modalSymbol] as any
 
   useEffect(() => {
     if (modalSymbol) {
@@ -22,22 +37,22 @@ function Provider({ modalMap, children }: Props) {
     }
   }, [modalSymbol])
 
-  const show = (modalSymbol: string, modalProps: any = {}) => {
+  const show: ShowFC<any> = (modalSymbol, modalProps = {}) => {
     setModalSymbol(modalSymbol)
     setModalProps(modalProps)
   }
 
-  const hide = (wait: number = 0) => {
+  const hide: HideFC = (wait = 0) => {
     setVisible(false)
     setTimeout(() => {
-      setModalSymbol(undefined)
+      setModalSymbol('')
     }, wait)
   }
 
   return (
     <ModalContext.Provider value={{ show, hide }}>
       {children}
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={null}>
         {modalSymbol
           ? ReactDOM.createPortal(
               <Modal visible={visible} {...modalProps}></Modal>,
@@ -48,5 +63,3 @@ function Provider({ modalMap, children }: Props) {
     </ModalContext.Provider>
   )
 }
-
-export default Provider

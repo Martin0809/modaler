@@ -1,8 +1,8 @@
 import { useContext } from 'react'
-import { ModalContext } from '../Provider'
+import { ModalContext, ModalInstance } from '../Provider'
 
-export default function useModal() {
-  const modal = useContext(ModalContext)
+export default function useModal(): ModalInstance {
+  const modal: ModalInstance = useContext(ModalContext)
 
   return modal
 }
