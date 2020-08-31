@@ -1,6 +1,6 @@
 {
   "name": "modaler",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple pluggable modal container",
   "main": "dist/index.js",
   "scripts": {
@@ -17,16 +17,18 @@
     "url": "https://github.com/Martin0809/modaler/issues"
   },
   "homepage": "https://github.com/Martin0809/modaler#readme",
+  "files": [
+    "dist/",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
   "peerDependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
-  },
-  "dependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
@@ -47,6 +49,8 @@
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-modal": "^3.11.2",
     "rollup": "^2.26.5",
     "rollup-plugin-babel": "^4.4.0",

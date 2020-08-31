@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal } from 'antd'
-import { useModal, ModalInstance } from '../../../src'
+import { useModal, ModalInstance } from '../../../dist'
 
 export interface ConfirmModalProps {
   title: string

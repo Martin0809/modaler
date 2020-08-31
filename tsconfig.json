@@ -6,7 +6,8 @@
     "moduleResolution": "node",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "declaration": true
   },
   "include": ["src/**/*"]
 }

@@ -6,7 +6,7 @@ type HideFC = (wait?: number) => void
 
 export interface ModalInstance<T = {}> {
   show: ShowFC<T>
-  hide: (wait?: number) => void
+  hide: HideFC
 }
 
 export const ModalContext: React.Context<ModalInstance> = createContext(null)
