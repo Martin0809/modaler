@@ -32,3 +32,14 @@ jobs:
 
       - run: npm install
       - run: npm run build
+
+      - name: Publish
+        uses: pascalgn/npm-publish-action@v1.3.3
+        with: # All of theses inputs are optional
+          tag_name: 'v%s'
+          tag_message: 'v%s'
+          commit_pattern: "^Release (\\S+)"
+          workspace: '.'
+        env: # More info about the environment variables in the README
+          GITHUB_TOKEN: ${{ secrets.TOKEN }} # Leave this as is, it's automatically generated
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # You need to set this in your repo settings
