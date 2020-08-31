@@ -2,23 +2,22 @@ import React from 'react'
 import { Modal } from 'antd'
 import { useModal, ModalInstance } from '../../../dist'
 
-export interface ConfirmModalProps {
+export interface SuccessModalProps {
   title: string
-  content: string
 }
 
-interface Props extends ConfirmModalProps {
+interface Props extends SuccessModalProps {
   visible: boolean
 }
 
-function ConfirmModal({ visible, title, content }: Props) {
+function SuccessModal({ visible, title }: Props) {
   const modal: ModalInstance<Props> = useModal()
 
   return (
     <Modal visible={visible} title={title} onCancel={() => modal.hide(300)}>
-      {content}
+      12312
     </Modal>
   )
 }
 
-export default ConfirmModal
+export default SuccessModal

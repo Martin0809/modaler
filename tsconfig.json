@@ -1,15 +1,13 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
-    "module": "esnext",
-    "target": "esnext",
+    "module": "ESNext",
+    "target": "ESNext",
     "jsx": "react",
     "moduleResolution": "node",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "declaration": true
   },
   "include": ["src/**/*"]
 }
