@@ -19,6 +19,12 @@ jobs:
           node-version: '12'
           check-latest: true
 
+      - name: Install
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
       - name: Release
         uses: JS-DevTools/npm-publish@v1
         with:
