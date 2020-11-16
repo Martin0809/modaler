@@ -1,5 +1,6 @@
-import React, { Suspense, createContext, useState, useEffect } from 'react'
+import React, { Suspense, createContext, useState } from 'react'
 import ReactDOM from 'react-dom'
+import isEqual from 'lodash/isEqual'
 
 type ShowFC<T> = (modalSymbol: string, modalProps?: T) => void
 type HideFC = (symbol?: string | number, wait?: number) => void
@@ -18,34 +19,28 @@ export interface ModalMap {
 }
 
 export default function Provider({
-  modalMap,
   children,
-  fallback = null,
+  modalMap,
   hideDelay = 0,
+  fallback = null,
 }: {
-  modalMap: ModalMap
   children: React.ReactNode
-  fallback?: React.ReactNode | null
+  modalMap: ModalMap
   hideDelay?: number
+  fallback?: React.ReactNode | null
 }): React.ReactElement {
   const [modals, setModals] = useState([])
-  const [visible, setVisible] = useState(false)
-  const [modalSymbol, setModalSymbol] = useState('')
-  const [modalProps, setModalProps] = useState({})
+  const [isHiding, setIsHiding] = useState(false)
 
-  // const Modal = modalMap[modalSymbol] as any
-
-  // useEffect(() => {
-  //   if (modalSymbol) {
-  //     setVisible(true)
-  //   }
-  // }, [modalSymbol])
+  const areEqual = (prevProps: any, nextProps: any): boolean => {
+    return isEqual(prevProps, nextProps)
+  }
 
   const show: ShowFC<any> = (modalSymbol, modalProps = {}) => {
-    // setModalSymbol(modalSymbol)
-    // setModalProps(modalProps)
+    if (isHiding) return
+
     const newModals = modals.concat({
-      Modal: React.memo(modalMap[modalSymbol]),
+      Modal: React.memo(modalMap[modalSymbol], areEqual),
       visible: true,
       modalSymbol,
       modalProps,
@@ -62,20 +57,20 @@ export default function Provider({
       }
     })
 
+    setIsHiding(true)
     setModals(newModals)
 
     setTimeout(() => {
+      setIsHiding(false)
       setModals([])
     }, wait as number)
   }
 
   const hide: HideFC = (symbol, wait = hideDelay) => {
+    if (isHiding) return
+
     if (!symbol || typeof symbol === 'number') return hideAll(symbol)
 
-    // setVisible(false)
-    // setTimeout(() => {
-    //   setModalSymbol('')
-    // }, wait)
     const newModals = modals.map((modal) => {
       if (modal.modalSymbol === symbol) {
         return {
@@ -87,24 +82,18 @@ export default function Provider({
       return modal
     })
 
+    setIsHiding(true)
     setModals(newModals)
 
     setTimeout(() => {
+      setIsHiding(false)
       setModals(modals.filter((modal) => modal.modalSymbol !== symbol))
     }, wait)
   }
 
-  console.log(modals)
-
   return (
     <ModalContext.Provider value={{ show, hide }}>
       {children}
-      {/* {modalSymbol
-        ? ReactDOM.createPortal(
-          <Modal visible={visible} {...modalProps}></Modal>,
-          document.body
-          )
-        : null} */}
       {ReactDOM.createPortal(
         modals.map(({ Modal, visible, modalSymbol, modalProps }) => (
           <Suspense key={modalSymbol} fallback={fallback}>

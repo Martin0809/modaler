@@ -1,13 +1,16 @@
 import typescript from 'rollup-plugin-typescript2'
-import babel from 'rollup-plugin-babel'
+import babel from '@rollup/plugin-babel'
+import commonjs from '@rollup/plugin-commonjs'
 
-export default {
+const renderConfig = (dir, format) => ({
   input: 'src/index.tsx',
   output: {
-    file: 'lib/index.js',
-    format: 'cjs',
+    dir,
+    format,
     sourcemap: true,
   },
   external: ['react', 'react-dom'],
-  plugins: [typescript(), babel()],
-}
+  plugins: [typescript(), babel(), commonjs()],
+})
+
+export default [renderConfig('lib', 'cjs'), renderConfig('es', 'es')]
