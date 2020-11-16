@@ -28,7 +28,7 @@ import Container from './Container'
 import modals from './modals'
 
 const App = () => (
-  <ModalProvider modalMap={modals}>
+  <ModalProvider modalMap={modals} hideDelay={300} fallback={null}>
     <Container />
   </ModalProvider>
 )
@@ -43,7 +43,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 import ConfirmModal from './ConfirmModal'
 
 export default {
-  CONFIRM_MODAL: ConfirmModal
+  CONFIRM_MODAL: ConfirmModal,
 }
 ```
 
@@ -72,6 +72,8 @@ export default Container
 ### ModalProviderProps
 
 - modalMap: Modal 组件以 key value 形式的映射
+- hideDelay: 延时关闭
+- fallback: `React.Suspense` 中的 fallback
 
 ### useModal(): object
 
@@ -80,9 +82,16 @@ export default Container
 - key: 想要渲染的 Modal 组件的 key，必填
 - props: 传递给 Modal 组件的 props，默认带有 `visible` 属性，控制 Modal 组件显示隐藏时请使用该属性
 
+#### hide(symbol: string, wait: number)
+
+- symbol: 指定关闭 key 为 symbol 的 Modal 组件
+- wait: 毫秒数，一定时间后销毁 Modal 组件，一般用于有关闭动画的 Modal 组件，默认为 `hideDelay`
+
 #### hide(wait: number)
 
-- wait: 毫秒数，一定时间后销毁 Modal 组件，一般用于有关闭动画的 Modal 组件，默认为 `0`
+关闭全部 Modal 组件
+
+- wait: 毫秒数，一定时间后销毁 Modal 组件，一般用于有关闭动画的 Modal 组件，默认为 `hideDelay`
 
 ## Demo
 
