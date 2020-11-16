@@ -1,15 +1,12 @@
-name: CI
+name: RELEASE
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+  release:
+    types:
+      - created
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,8 +19,7 @@ jobs:
           node-version: '12'
           check-latest: true
 
-      - name: Install
-        run: npm install
-
-      - name: Build
-        run: npm run build
+      - name: Release
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
