@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Modal, Button } from 'antd'
 import { useModal, ModalInstance } from 'modaler/src'
 
@@ -10,9 +10,15 @@ interface Props extends SuccessModalProps {
   visible: boolean
 }
 
-function SuccessModal({ visible, title }: Props) {
+function SuccessModal(props: Props) {
+  const { visible, title } = props
   const modal: ModalInstance<Props> = useModal()
+
   console.log('SUCCESS_MODAL')
+
+  useEffect(() => {
+    console.log('SUCCESS_MODAL', props)
+  }, [props])
 
   return (
     <Modal
