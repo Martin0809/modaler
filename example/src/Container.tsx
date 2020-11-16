@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'antd'
-import { useModal, ModalInstance } from '../../dist'
+import { useModal, ModalInstance } from 'modaler/src'
 import { SuccessModalProps } from './components/SuccessModal'
 import { ConfirmModalProps } from './components/ConfirmModal'
 

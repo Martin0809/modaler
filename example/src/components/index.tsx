@@ -6,4 +6,7 @@ export default {
     () => import(/* webpackChunkName: "confirm-modal"*/ './ConfirmModal')
   ),
   SUCCESS_MODAL: SuccessModal,
+  SECOND_MODAL: lazy(
+    () => import(/* webpackChunkName: "second-modal"*/ './SecondModal')
+  ),
 }
