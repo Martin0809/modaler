@@ -1,6 +1,5 @@
 import React, { Suspense, createContext, useState } from 'react'
 import ReactDOM from 'react-dom'
-import isEqual from 'lodash/isEqual'
 
 type ShowFC<T> = (modalSymbol: string, modalProps?: T) => void
 type HideFC = (symbol?: string | number, wait?: number) => void
@@ -32,15 +31,11 @@ export default function Provider({
   const [modals, setModals] = useState([])
   const [isHiding, setIsHiding] = useState(false)
 
-  const areEqual = (prevProps: any, nextProps: any): boolean => {
-    return isEqual(prevProps, nextProps)
-  }
-
   const show: ShowFC<any> = (modalSymbol, modalProps = {}) => {
     if (isHiding) return
 
     const newModals = modals.concat({
-      Modal: React.memo(modalMap[modalSymbol], areEqual),
+      Modal: React.memo(modalMap[modalSymbol]),
       visible: true,
       modalSymbol,
       modalProps,
