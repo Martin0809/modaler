@@ -9,7 +9,7 @@ function render(Component) {
 render(App)
 
 if ((module as any).hot) {
-  ;(module as any).hot.accept('./App', function() {
+  ;(module as any).hot.accept('./App', function () {
     render(App)
   })
 }
